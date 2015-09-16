@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Flickr</string>
+    <string name="drawer_open">Menu opened</string>
+    <string name="drawer_close">Menu closed</string>
+    <string name="action_settings">Ajustes</string>
+    <string name="albums_menu">Albums</string>
+    <string name="fotos_menu">Fotos</string>
+    <string name="mas_comentadas_menu">Más comentadas</string>
+    <string name="cuentas_menu">Cuentas</string>
+    <string name="empty_list">No hay elementos</string>
+</resources>
