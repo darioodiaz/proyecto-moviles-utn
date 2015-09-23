@@ -1,3 +1,5 @@
+package moviles.flickr.services;
+
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.photos.Photo;
@@ -15,7 +17,7 @@ public class PhotoService {
     private Flickr flickr;
 
     private PhotoService() {
-        flickr = Config.getInstance().getFlickr();
+        flickr = FlickrConfig.getInstance().getFlickr();
     }
 
     public static PhotoService getInstance() {

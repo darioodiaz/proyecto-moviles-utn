@@ -1,21 +1,23 @@
+package moviles.flickr.services;
+
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.REST;
 
-public class Config {
+public class FlickrConfig {
 
     private static String API_KEY = "841f079bbd7d1a5732cdf3979553f67d";
     private static String SECRET_KEY = "d294e8d2f913541d";
-    private static Config self;
+    private static FlickrConfig self;
 
     private Flickr flickr;
 
-    private Config() {
+    private FlickrConfig() {
         flickr = new Flickr(API_KEY, SECRET_KEY, new REST());
     }
 
-    public static Config getInstance() {
+    public static FlickrConfig getInstance() {
         if (self == null) {
-            self = new Config();
+            self = new FlickrConfig();
         }
         return self;
     }

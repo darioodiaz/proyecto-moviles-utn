@@ -1,3 +1,5 @@
+package moviles.flickr.services;
+
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.people.PeopleInterface;
@@ -9,7 +11,7 @@ public class CommonService {
     private Flickr flickr;
 
     private CommonService() {
-        flickr = Config.getInstance().getFlickr();
+        flickr = FlickrConfig.getInstance().getFlickr();
     }
 
     public static CommonService getInstance() {

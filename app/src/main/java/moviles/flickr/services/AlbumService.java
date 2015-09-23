@@ -1,3 +1,5 @@
+package moviles.flickr.services;
+
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.people.User;
@@ -7,13 +9,15 @@ import com.flickr4java.flickr.photosets.PhotosetsInterface;
 
 import java.util.ArrayList;
 
+import moviles.flickr.services.FlickrConfig;
+
 public class AlbumService {
 
     private static AlbumService self;
     private Flickr flickr;
 
     private AlbumService() {
-        flickr = Config.getInstance().getFlickr();
+        flickr = FlickrConfig.getInstance().getFlickr();
     }
 
     public static AlbumService getInstance() {
