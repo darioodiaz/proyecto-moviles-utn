@@ -3,6 +3,7 @@ import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photosets.PhotosetsInterface;
 
+import java.lang.String;
 import java.util.ArrayList;
 
 public class PhotoService {
