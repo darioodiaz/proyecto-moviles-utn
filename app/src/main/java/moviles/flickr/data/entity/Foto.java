@@ -1,5 +1,7 @@
 package moviles.flickr.data.entity;
 
+import android.graphics.Bitmap;
+
 import java.util.List;
 
 public class Foto {
@@ -7,6 +9,8 @@ public class Foto {
     private String name;
     private List<Comentario> comentarios;
     private long albumId;
+    private Bitmap thumbnail;
+    private Bitmap photo;
 
     public long getId() {
         return id;
@@ -38,5 +42,21 @@ public class Foto {
 
     public void setAlbumId(long albumId) {
         this.albumId = albumId;
+    }
+
+    public Bitmap getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(Bitmap thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    public Bitmap getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
     }
 }

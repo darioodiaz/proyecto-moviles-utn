@@ -5,6 +5,10 @@ public class Album {
     private String titulo;
     private int cantidadFotos;
 
+    public Album() {
+
+    }
+
     public Album(String titulo, int cantidadFotos) {
         this.titulo = titulo;
         this.cantidadFotos = cantidadFotos;

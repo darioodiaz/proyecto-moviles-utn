@@ -5,8 +5,9 @@ import com.flickr4java.flickr.FlickrException;
 import com.flickr4java.flickr.photos.Photo;
 import com.flickr4java.flickr.photosets.PhotosetsInterface;
 
-import java.lang.String;
 import java.util.ArrayList;
+
+import moviles.flickr.data.entity.Foto;
 
 public class PhotoService {
 
@@ -27,15 +28,22 @@ public class PhotoService {
         return self;
     }
 
-    public ArrayList<Photo> getPhotosByAlbum(String albumId) {
+    public ArrayList<Foto> getPhotosByAlbum(String albumId) {
         PhotosetsInterface fInterface = flickr.getPhotosetsInterface();
         ArrayList<Photo> photos = new ArrayList<Photo>();
+        ArrayList<Foto> mapped = new ArrayList<Foto>();
         try {
             photos = fInterface.getPhotos(albumId, 50, 0);
+            Foto map;
+            for (Photo temp : photos) {
+                map = new Foto();
+                //map.setId(temp.getId());
+                mapped.add(map);
+            }
         } catch (FlickrException e) {
             e.printStackTrace();
         }
-        return photos;
+        return mapped;
     }
 
     public String getAlbumThumbnail() {

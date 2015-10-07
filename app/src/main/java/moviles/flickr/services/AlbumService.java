@@ -2,14 +2,13 @@ package moviles.flickr.services;
 
 import com.flickr4java.flickr.Flickr;
 import com.flickr4java.flickr.FlickrException;
-import com.flickr4java.flickr.people.User;
 import com.flickr4java.flickr.photosets.Photoset;
 import com.flickr4java.flickr.photosets.Photosets;
 import com.flickr4java.flickr.photosets.PhotosetsInterface;
 
 import java.util.ArrayList;
 
-import moviles.flickr.services.FlickrConfig;
+import moviles.flickr.data.entity.Album;
 
 public class AlbumService {
 
@@ -27,16 +26,22 @@ public class AlbumService {
         return self;
     }
 
-    public ArrayList<Photoset> getAlbums(String userId) {
+    public ArrayList<Album> getAlbums(String userId) {
         PhotosetsInterface fInterface = flickr.getPhotosetsInterface();
         ArrayList<Photoset> albums = new ArrayList<Photoset>();
+        ArrayList<Album> mapped = new ArrayList<Album>();
         try {
             Photosets ps = fInterface.getList(userId);
             albums = new ArrayList<Photoset>(ps.getPhotosets());
+            Album map;
+            for (Photoset temp : albums) {
+                map = new Album();
+                mapped.add(map);
+            }
         } catch (FlickrException e) {
             e.printStackTrace();
         }
-        return albums;
+        return mapped;
     }
 
 }
