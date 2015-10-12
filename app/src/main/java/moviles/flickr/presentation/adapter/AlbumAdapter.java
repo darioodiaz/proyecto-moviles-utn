@@ -27,6 +27,10 @@ public class AlbumAdapter extends BaseAdapter{
         inflater = LayoutInflater.from(context.getActivity());
     }
 
+    public void setData(List<Album> pData){
+        this.data = pData;
+    }
+
     @Override
     public int getCount() {
         return data.size();
@@ -39,7 +43,7 @@ public class AlbumAdapter extends BaseAdapter{
 
     @Override
     public long getItemId(int i) {
-        return data.get(i).getId();
+        return 0;
     }
 
     public void addItem(Album item){

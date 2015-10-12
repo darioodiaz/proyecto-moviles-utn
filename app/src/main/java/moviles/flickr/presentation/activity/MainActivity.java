@@ -1,7 +1,6 @@
 package moviles.flickr.presentation.activity;
 
 import android.app.Fragment;
-import android.app.ListActivity;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -12,12 +11,14 @@ import android.widget.Toast;
 
 import moviles.flickr.R;
 import moviles.flickr.presentation.fragment.AlbumFragment;
+import moviles.flickr.presentation.fragment.FotoFragment;
+import moviles.flickr.presentation.fragment.OnFragmentInteractionListener;
 import moviles.flickr.presentation.navigation.NavigationDrawerCallbacks;
 import moviles.flickr.presentation.navigation.NavigationDrawerFragment;
 
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationDrawerCallbacks, AlbumFragment.OnFragmentInteractionListener {
+        implements NavigationDrawerCallbacks, OnFragmentInteractionListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -50,6 +51,12 @@ public class MainActivity extends AppCompatActivity
                 if (fragment == null)
                     fragment = new AlbumFragment();
                 getFragmentManager().beginTransaction().replace(R.id.container, fragment, AlbumFragment.TAG).addToBackStack(null).commit();
+                break;
+            case 2: //fotos
+                fragment = getFragmentManager().findFragmentByTag(FotoFragment.TAG);
+                if (fragment == null)
+                    fragment = new FotoFragment();
+                getFragmentManager().beginTransaction().replace(R.id.container, fragment, FotoFragment.TAG).addToBackStack(null).commit();
                 break;
         }
     }
@@ -92,9 +99,21 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
+    public void onAlbumFragmentInteraction(String albumId){
+        Fragment fragment;
+        fragment = getFragmentManager().findFragmentByTag(FotoFragment.TAG);
 
-    //TODO:prueba
-    public void onFragmentInteraction(String item){
+        if (fragment == null)
+            fragment = new FotoFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FotoFragment.ALBUM_ID_KEY, albumId);
+        fragment.setArguments(bundle);
+
+        getFragmentManager().beginTransaction().replace(R.id.container, fragment, FotoFragment.TAG).addToBackStack(null).commit();
+    }
+
+    public void onFotoFragmentInteraction(String item){
         Toast.makeText(this, item, Toast.LENGTH_LONG).show();
     }
 }
