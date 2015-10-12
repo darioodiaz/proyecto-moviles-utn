@@ -2,15 +2,23 @@ package moviles.flickr.presentation.fragment;
 
 import android.app.Activity;
 import android.app.ListFragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.flickr4java.flickr.people.User;
+
+import java.net.URL;
+import java.util.List;
+
 import moviles.flickr.R;
 import moviles.flickr.data.entity.Album;
 import moviles.flickr.presentation.adapter.AlbumAdapter;
+import moviles.flickr.services.AlbumService;
+import moviles.flickr.services.CommonService;
 
 public class AlbumFragment extends ListFragment implements AdapterView.OnItemClickListener {
     public static final String TAG = "AlbumFragment";
@@ -35,30 +43,8 @@ public class AlbumFragment extends ListFragment implements AdapterView.OnItemCli
     }
 
     private void loadData(){
-        adapter.addItem(new Album("Album 1", 152));
-        adapter.addItem(new Album("Album 2", 25));
-        adapter.addItem(new Album("Album 3", 65));
-        adapter.addItem(new Album("Album 4", 19));
-        adapter.addItem(new Album("Album 5", 96));
-        adapter.addItem(new Album("Album 6", 251));
-        adapter.addItem(new Album("Album 7", 45));
-        adapter.addItem(new Album("Album 8", 25));
-        adapter.addItem(new Album("Album 9", 14));
-        adapter.addItem(new Album("Album 10", 452));
-        adapter.addItem(new Album("Album 11", 758));
-        adapter.addItem(new Album("Album 12", 654));
-        adapter.addItem(new Album("Album 13", 152));
-        adapter.addItem(new Album("Album 14", 25));
-        adapter.addItem(new Album("Album 15", 65));
-        adapter.addItem(new Album("Album 16", 19));
-        adapter.addItem(new Album("Album 17", 96));
-        adapter.addItem(new Album("Album 18", 251));
-        adapter.addItem(new Album("Album 19", 45));
-        adapter.addItem(new Album("Album 20", 25));
-        adapter.addItem(new Album("Album 21", 14));
-        adapter.addItem(new Album("Album 22", 452));
-        adapter.addItem(new Album("Album 23", 758));
-        adapter.addItem(new Album("Album 24", 654));
+        FindAlbumsTask albumsTask = new FindAlbumsTask();
+        albumsTask.execute();
     }
 
     @Override
@@ -94,23 +80,29 @@ public class AlbumFragment extends ListFragment implements AdapterView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
         if (null != mListener) {
-            mListener.onFragmentInteraction(adapter.getItem(position).getTitulo());
+            mListener.onAlbumFragmentInteraction(adapter.getItem(position).getId());
         }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction(String item);
-    }
+    class FindAlbumsTask extends AsyncTask<String, Void, List<Album>> {
 
+        private Exception exception;
+
+        protected List<Album> doInBackground(String... userMail) {
+            try {
+                //CommonService commonService = CommonService.getInstance();
+                //User user = commonService.getUserIdByEmail("paula.acanepa@yahoo.com.ar");
+                AlbumService albumService = AlbumService.getInstance();
+                return albumService.getAlbums("136129465@N07");
+            } catch (Exception e) {
+                this.exception = e;
+                return null;
+            }
+        }
+
+        protected void onPostExecute(List<Album> albums) {
+            adapter.setData(albums);
+            adapter.notifyDataSetChanged();
+        }
+    }
 }

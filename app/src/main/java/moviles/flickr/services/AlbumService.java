@@ -8,6 +8,8 @@ import com.flickr4java.flickr.photosets.PhotosetsInterface;
 
 import java.util.ArrayList;
 
+import moviles.flickr.data.DataBaseManager;
+import moviles.flickr.data.dao.AlbumDao;
 import moviles.flickr.data.entity.Album;
 
 public class AlbumService {
@@ -34,9 +36,16 @@ public class AlbumService {
             Photosets ps = fInterface.getList(userId);
             albums = new ArrayList<Photoset>(ps.getPhotosets());
             Album map;
+            boolean hasData = DataBaseManager.getInstance(null).hasData(DataBaseManager.ALBUMS_TABLE);
             for (Photoset temp : albums) {
                 map = new Album();
+                map.setId(temp.getId());
+                map.setCantidadFotos(temp.getPhotoCount());
+                map.setTitulo(temp.getTitle());
                 mapped.add(map);
+                if (!hasData) {
+                    AlbumDao.getInstance().insert(map);
+                }
             }
         } catch (FlickrException e) {
             e.printStackTrace();

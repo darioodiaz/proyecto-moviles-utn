@@ -1,7 +1,7 @@
 package moviles.flickr.data.entity;
 
 public class Album {
-    private long id;
+    private String id;
     private String titulo;
     private int cantidadFotos;
 
@@ -14,12 +14,12 @@ public class Album {
         this.cantidadFotos = cantidadFotos;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
-        id = id;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitulo() {

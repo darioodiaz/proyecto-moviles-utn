@@ -4,19 +4,21 @@ import android.graphics.Bitmap;
 
 import java.util.List;
 
+import moviles.flickr.services.PhotoService;
+
 public class Foto {
-    private long id;
+    private String id;
     private String name;
     private List<Comentario> comentarios;
-    private long albumId;
+    private String albumId;
     private Bitmap thumbnail;
     private Bitmap photo;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -36,11 +38,11 @@ public class Foto {
         this.comentarios = comentarios;
     }
 
-    public long getAlbumId() {
+    public String getAlbumId() {
         return albumId;
     }
 
-    public void setAlbumId(long albumId) {
+    public void setAlbumId(String albumId) {
         this.albumId = albumId;
     }
 
@@ -53,6 +55,9 @@ public class Foto {
     }
 
     public Bitmap getPhoto() {
+        if (this.photo == null) {
+            PhotoService.getInstance().getBigPhotoAsStream(this.id);
+        }
         return photo;
     }
 

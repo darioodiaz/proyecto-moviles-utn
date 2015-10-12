@@ -3,16 +3,17 @@ package moviles.flickr.data.entity;
 import java.util.Date;
 
 public class Comentario {
-    private long id;
+    private String id;
     private String body;
-    private long fotoId;
+    private String fotoId;
     private Date fecha;
+    private String autor;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -24,11 +25,11 @@ public class Comentario {
         this.body = body;
     }
 
-    public long getFotoId() {
+    public String getFotoId() {
         return fotoId;
     }
 
-    public void setFotoId(long fotoId) {
+    public void setFotoId(String fotoId) {
         this.fotoId = fotoId;
     }
 
@@ -38,5 +39,11 @@ public class Comentario {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public String getAutor(){return autor;}
+
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 }
